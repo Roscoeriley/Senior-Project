@@ -21,7 +21,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.seniorproject.data.DataSource.quantityOptions
+import com.example.seniorproject.data.DataSource.mainMenuOptions
 import com.example.seniorproject.ui.theme.SeniorProjectTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,47 +34,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainScreen(quantityOptions = quantityOptions, onNextButtonClicked = {})
+                    BowlingApp()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun MainScreen(quantityOptions: List<Pair<Int, Int>>, onNextButtonClicked: (Int) -> Unit, modifier: Modifier = Modifier) {
-    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(painter = painterResource(R.drawable.bowlero_logo),
-            contentDescription = "Bowlero Logo",
-            modifier = Modifier.width(300.dp))
-        Spacer(Modifier.height(16.dp))
-        quantityOptions.forEach { item ->
-            MainScreenButtons(
-                labelResourceId = item.first,
-                onClick = { onNextButtonClicked(item.second) }
-            )
-        }
-    }
-}
-
-@Composable
-fun MainScreenButtons(
-    @StringRes labelResourceId: Int,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-){
-    Button(
-        onClick = onClick,
-        modifier = modifier.widthIn(min = 250.dp)
-    ) {
-        Text(stringResource(labelResourceId))
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    SeniorProjectTheme {
-        MainScreen(quantityOptions = quantityOptions, onNextButtonClicked = {})
     }
 }
