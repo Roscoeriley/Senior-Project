@@ -16,9 +16,8 @@ import com.example.seniorproject.data.DataSource
 import com.example.seniorproject.R
 
 @Composable
-fun MainScreen(onLoginButtonClicked: () -> Unit,
-               onTournamentsButtonClicked: () -> Unit,
-               onLeaguesButtonClicked: () -> Unit,
+fun MainScreen(onProfessionalButtonClicked: () -> Unit,
+               onPracticeButtonClicked: () -> Unit,
                onStatisticsButtonClicked: () -> Unit,
                onSettingsButtonClicked: () -> Unit,
                onHelpButtonClicked: () -> Unit,
@@ -29,17 +28,13 @@ fun MainScreen(onLoginButtonClicked: () -> Unit,
             contentDescription = "Bowlero Logo",
             modifier = Modifier.width(300.dp))
         Spacer(Modifier.height(16.dp))
-        Button(onClick = onLoginButtonClicked,
+        Button(onClick = onProfessionalButtonClicked,
             modifier.widthIn(min = 250.dp)) {
-            Text(stringResource(R.string.login))
+            Text(stringResource(R.string.professional))
         }
-        Button(onClick = onTournamentsButtonClicked,
+        Button(onClick = onPracticeButtonClicked,
             modifier.widthIn(min = 250.dp)) {
-            Text(stringResource(R.string.tournaments))
-        }
-        Button(onClick = onLeaguesButtonClicked,
-            modifier.widthIn(min = 250.dp)) {
-            Text(stringResource(R.string.leagues))
+            Text(stringResource(R.string.practice))
         }
         Button(onClick = onStatisticsButtonClicked,
             modifier.widthIn(min = 250.dp)) {
@@ -62,9 +57,8 @@ fun MainScreen(onLoginButtonClicked: () -> Unit,
 fun DefaultPreview() {
     SeniorProjectTheme {
         MainScreen(
-            onLoginButtonClicked = {},
-            onTournamentsButtonClicked = {},
-            onLeaguesButtonClicked = {},
+            onProfessionalButtonClicked = {},
+            onPracticeButtonClicked = {},
             onStatisticsButtonClicked = {},
             onSettingsButtonClicked = {},
             onHelpButtonClicked = {})

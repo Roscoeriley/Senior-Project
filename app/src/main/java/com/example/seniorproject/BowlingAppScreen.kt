@@ -8,6 +8,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -24,13 +25,16 @@ import com.example.seniorproject.data.DataSource.mainMenuOptions
 import com.example.seniorproject.ui.theme.*
 
 enum class BowlingAppScreen(@StringRes val title: Int) {
-    Start(title = R.string.app_name),
     Login(title = R.string.login),
-    Tournaments(title = R.string.tournaments),
-    Leagues(title = R.string.leagues),
+    Main(title = R.string.app_name),
+    Professional(title = R.string.professional),
+    Practice(title = R.string.practice),
     Statistics(title = R.string.statistics),
     Settings(title = R.string.settings),
-    Help(title = R.string.help)
+    Help(title = R.string.help),
+    AddLeague(title = R.string.add_league),
+    AddTournament(title = R.string.add_tournament),
+    AddGame(title = R.string.add_game)
 }
 
 /**
@@ -41,6 +45,8 @@ fun BowlingAppBar(
     @StringRes currentScreenTitle: Int,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit,
+    showAddIcon: Boolean,
+    onAddClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
@@ -55,19 +61,27 @@ fun BowlingAppBar(
                     )
                 }
             }
+        },
+        actions = {
+            if (showAddIcon) {
+                IconButton(onClick = onAddClicked) {
+                    Icon(imageVector = Icons.Filled.Add, contentDescription = null)
+                }
+            }
+
         }
     )
 }
 
 @Composable
 fun BowlingApp(modifier: Modifier = Modifier) {
-    //Create NavController
+    // Create NavController
     val navController = rememberNavController()
     // Get current back stack entry
     val backStackEntry by navController.currentBackStackEntryAsState()
     // Get the name of the current screen
     val currentScreen = BowlingAppScreen.valueOf(
-        backStackEntry?.destination?.route ?: BowlingAppScreen.Start.name
+        backStackEntry?.destination?.route ?: BowlingAppScreen.Login.name
     )
 /*    // Create ViewModel
     val viewModel: OrderViewModel = viewModel()*/
@@ -77,7 +91,14 @@ fun BowlingApp(modifier: Modifier = Modifier) {
             BowlingAppBar(
                 currentScreenTitle = currentScreen.title,
                 canNavigateBack = navController.previousBackStackEntry != null,
-                navigateUp = { navController.navigateUp() }
+                navigateUp = { navController.navigateUp() },
+                showAddIcon = currentScreen == BowlingAppScreen.Professional || currentScreen == BowlingAppScreen.Practice,
+                onAddClicked = {
+                    if (currentScreen == BowlingAppScreen.Professional) {
+                        navController.navigate(BowlingAppScreen.AddLeague.name)
+                    } else
+                        navController.navigate(BowlingAppScreen.AddTournament.name)
+                }
             )
         }
     ) { innerPadding ->
@@ -85,20 +106,25 @@ fun BowlingApp(modifier: Modifier = Modifier) {
 
         NavHost(
             navController = navController,
-            startDestination = BowlingAppScreen.Start.name,
+            startDestination = BowlingAppScreen.Login.name,
             modifier = modifier.padding(innerPadding),
         ) {
-
-            composable(route = BowlingAppScreen.Start.name) {
-                MainScreen(
+            //starts on "Login screen"
+            composable(route = BowlingAppScreen.Login.name) {
+                LoginScreen(
+                    credentials = Credentials(userName =  "", password = ""),
                     onLoginButtonClicked = {
-                        navController.navigate(BowlingAppScreen.Login.name)
+                        navController.navigate(BowlingAppScreen.Main.name)
+                    })
+            }
+            //goes to "Main screen"
+            composable(route = BowlingAppScreen.Main.name) {
+                MainScreen(
+                    onProfessionalButtonClicked = {
+                        navController.navigate(BowlingAppScreen.Professional.name)
                     },
-                    onTournamentsButtonClicked = {
-                        navController.navigate(BowlingAppScreen.Tournaments.name)
-                    },
-                    onLeaguesButtonClicked = {
-                        navController.navigate(BowlingAppScreen.Leagues.name)
+                    onPracticeButtonClicked = {
+                        navController.navigate(BowlingAppScreen.Practice.name)
                     },
                     onStatisticsButtonClicked = {
                         navController.navigate(BowlingAppScreen.Statistics.name)
@@ -111,19 +137,15 @@ fun BowlingApp(modifier: Modifier = Modifier) {
                     }
                 )
             }
-            //goes to "Login screen"
-            composable(route = BowlingAppScreen.Login.name) {
-                LoginScreen()
+
+            //goes to "Professional screen"
+            composable(route = BowlingAppScreen.Professional.name) {
+                ProfessionalScreen()
             }
 
-            //goes to "Tournaments screen"
-            composable(route = BowlingAppScreen.Tournaments.name) {
-                TournamentsScreen()
-            }
-
-            //goes to "Leagues screen"
-            composable(route = BowlingAppScreen.Leagues.name) {
-                LeaguesScreen()
+            //goes to "Practice screen"
+            composable(route = BowlingAppScreen.Practice.name) {
+                PracticeScreen()
             }
 
             //goes to "Statistics screen"
@@ -139,6 +161,21 @@ fun BowlingApp(modifier: Modifier = Modifier) {
             //goes to "Help screen"
             composable(route = BowlingAppScreen.Help.name) {
                 HelpScreen()
+            }
+
+            //goes to "AddLeague screen"
+            composable(route = BowlingAppScreen.AddLeague.name) {
+                AddLeague()
+            }
+
+            //goes to "AddTournament screen"
+            composable(route = BowlingAppScreen.AddTournament.name) {
+                AddTournament()
+            }
+
+            //goes to "AddGame screen"
+            composable(route = BowlingAppScreen.AddGame.name) {
+                AddGame()
             }
         }
     }

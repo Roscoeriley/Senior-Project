@@ -5,12 +5,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun TournamentsScreen() {
-    Text(text = "Tournaments Screen")
+fun PracticeScreen() {
+    Text(text = "Practice Screen")
 }
 
 @Preview
 @Composable
-fun TournamentsPreview(){
-    TournamentsScreen()
+fun PracticePreview(){
+    PracticeScreen()
 }
