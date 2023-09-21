@@ -112,7 +112,6 @@ fun BowlingApp(modifier: Modifier = Modifier) {
             //starts on "Login screen"
             composable(route = BowlingAppScreen.Login.name) {
                 LoginScreen(
-                    credentials = Credentials(userName =  "", password = ""),
                     onLoginButtonClicked = {
                         navController.navigate(BowlingAppScreen.Main.name)
                     })
