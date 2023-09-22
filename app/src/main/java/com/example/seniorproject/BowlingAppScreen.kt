@@ -144,7 +144,7 @@ fun BowlingApp(modifier: Modifier = Modifier) {
 
             //goes to "Practice screen"
             composable(route = BowlingAppScreen.Practice.name) {
-                PracticeScreen()
+                BowlingScoreSheet()
             }
 
             //goes to "Statistics screen"

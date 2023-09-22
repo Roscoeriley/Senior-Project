@@ -23,30 +23,47 @@ fun MainScreen(onProfessionalButtonClicked: () -> Unit,
                onHelpButtonClicked: () -> Unit,
                modifier: Modifier = Modifier
 ) {
-    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(painter = painterResource(R.drawable.bowlero_logo),
-            contentDescription = "Bowlero Logo",
-            modifier = Modifier.width(300.dp))
-        Spacer(Modifier.height(16.dp))
-        Button(onClick = onProfessionalButtonClicked,
-            modifier.widthIn(min = 250.dp)) {
-            Text(stringResource(R.string.professional))
-        }
-        Button(onClick = onPracticeButtonClicked,
-            modifier.widthIn(min = 250.dp)) {
-            Text(stringResource(R.string.practice))
-        }
-        Button(onClick = onStatisticsButtonClicked,
-            modifier.widthIn(min = 250.dp)) {
-            Text(stringResource(R.string.statistics))
-        }
-        Button(onClick = onSettingsButtonClicked,
-            modifier.widthIn(min = 250.dp)) {
-            Text(stringResource(R.string.settings))
-        }
-        Button(onClick = onHelpButtonClicked,
-            modifier.widthIn(min = 250.dp)) {
-            Text(stringResource(R.string.help))
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(R.drawable.bowlero_logo),
+                contentDescription = "Bowlero Logo",
+                modifier = Modifier.width(300.dp)
+            )
+            Spacer(Modifier.height(16.dp))
+            Button(
+                onClick = onProfessionalButtonClicked,
+                modifier.widthIn(min = 250.dp)
+            ) {
+                Text(stringResource(R.string.professional))
+            }
+            Button(
+                onClick = onPracticeButtonClicked,
+                modifier.widthIn(min = 250.dp)
+            ) {
+                Text(stringResource(R.string.practice))
+            }
+            Button(
+                onClick = onStatisticsButtonClicked,
+                modifier.widthIn(min = 250.dp)
+            ) {
+                Text(stringResource(R.string.statistics))
+            }
+            Button(
+                onClick = onSettingsButtonClicked,
+                modifier.widthIn(min = 250.dp)
+            ) {
+                Text(stringResource(R.string.settings))
+            }
+            Button(
+                onClick = onHelpButtonClicked,
+                modifier.widthIn(min = 250.dp)
+            ) {
+                Text(stringResource(R.string.help))
+            }
         }
     }
 }
