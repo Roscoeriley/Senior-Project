@@ -20,6 +20,7 @@ fun MainScreen(onProfessionalButtonClicked: () -> Unit,
                onPracticeButtonClicked: () -> Unit,
                onStatisticsButtonClicked: () -> Unit,
                onSettingsButtonClicked: () -> Unit,
+               onTipsButtonClicked: () -> Unit,
                onHelpButtonClicked: () -> Unit,
                modifier: Modifier = Modifier
 ) {
@@ -59,6 +60,12 @@ fun MainScreen(onProfessionalButtonClicked: () -> Unit,
                 Text(stringResource(R.string.settings))
             }
             Button(
+                onClick = onTipsButtonClicked,
+                modifier.widthIn(min = 250.dp)
+            ) {
+                Text(stringResource(R.string.tips))
+            }
+            Button(
                 onClick = onHelpButtonClicked,
                 modifier.widthIn(min = 250.dp)
             ) {
@@ -78,6 +85,7 @@ fun DefaultPreview() {
             onPracticeButtonClicked = {},
             onStatisticsButtonClicked = {},
             onSettingsButtonClicked = {},
+            onTipsButtonClicked = {},
             onHelpButtonClicked = {})
     }
 }

@@ -31,6 +31,7 @@ enum class BowlingAppScreen(@StringRes val title: Int) {
     Practice(title = R.string.practice),
     Statistics(title = R.string.statistics),
     Settings(title = R.string.settings),
+    Tips(title = R.string.tips),
     Help(title = R.string.help),
     AddLeague(title = R.string.add_league),
     AddTournament(title = R.string.add_tournament),
@@ -131,6 +132,9 @@ fun BowlingApp(modifier: Modifier = Modifier) {
                     onSettingsButtonClicked = {
                         navController.navigate(BowlingAppScreen.Settings.name)
                     },
+                    onTipsButtonClicked = {
+                        navController.navigate(BowlingAppScreen.Tips.name)
+                    },
                     onHelpButtonClicked = {
                         navController.navigate(BowlingAppScreen.Help.name)
                     }
@@ -144,7 +148,7 @@ fun BowlingApp(modifier: Modifier = Modifier) {
 
             //goes to "Practice screen"
             composable(route = BowlingAppScreen.Practice.name) {
-                BowlingScoreSheet()
+                AddGame()
             }
 
             //goes to "Statistics screen"
@@ -155,6 +159,11 @@ fun BowlingApp(modifier: Modifier = Modifier) {
             //goes to "Settings screen"
             composable(route = BowlingAppScreen.Settings.name) {
                 SettingsScreen()
+            }
+
+            //goes to "Tips screen"
+            composable(route = BowlingAppScreen.Tips.name) {
+                TipsScreen(tips = tips)
             }
 
             //goes to "Help screen"

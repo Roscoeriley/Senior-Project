@@ -116,7 +116,7 @@ fun WeeksRow(modifier: Modifier = Modifier) {
 
     Row(modifier = modifier
         .fillMaxWidth()
-        .size(48.dp), verticalAlignment = Alignment.CenterVertically) {
+        .size(100.dp), verticalAlignment = Alignment.CenterVertically) {
         Text(text = stringResource(R.string.number_of_weeks))
         EditNumberField(
             label = R.string.number_of_weeks,
@@ -139,7 +139,7 @@ fun GamesPerWeekRow(modifier: Modifier = Modifier) {
 
     Row(modifier = modifier
         .fillMaxWidth()
-        .size(48.dp), verticalAlignment = Alignment.CenterVertically) {
+        .size(100.dp), verticalAlignment = Alignment.CenterVertically) {
         Text(text = stringResource(R.string.games_per_week))
         EditNumberField(
             label = R.string.games_per_week,
@@ -162,7 +162,7 @@ fun GamesPerSeriesRow(modifier: Modifier = Modifier) {
 
     Row(modifier = modifier
         .fillMaxWidth()
-        .size(48.dp), verticalAlignment = Alignment.CenterVertically) {
+        .size(100.dp), verticalAlignment = Alignment.CenterVertically) {
         Text(text = stringResource(R.string.games_per_series))
         EditNumberField(
             label = R.string.games_per_series,
