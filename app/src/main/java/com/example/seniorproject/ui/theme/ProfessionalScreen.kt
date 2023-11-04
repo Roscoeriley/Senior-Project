@@ -79,29 +79,11 @@ fun ProfessionalScreen() {
         // Display content based on the selected option
         if (selectedOption == "Leagues") {
             // Content for "Leagues" selected
-            Text(
-                text = "Monday Night Trios",
-                style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier.padding(start = 8.dp),
-                textAlign = TextAlign.Start,
-                fontSize = 16.sp
-            )
-            Text(
-                text = "Northrock Mixers",
-                style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier.padding(start = 8.dp),
-                textAlign = TextAlign.Start,
-                fontSize = 16.sp
-            )
+            ClickableText("Monday Night Trios") {}
+            ClickableText("Northrock Mixers") {}
         } else if (selectedOption == "Tournaments") {
             // Content for "Tournaments" selected
-            Text(
-                text = "None",
-                style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier.padding(start = 8.dp),
-                textAlign = TextAlign.Start,
-                fontSize = 16.sp
-            )
+            ClickableText("None") {}
         }
     }
 }

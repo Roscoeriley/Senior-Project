@@ -98,7 +98,7 @@ fun BowlingApp(modifier: Modifier = Modifier) {
                     if (currentScreen == BowlingAppScreen.Professional) {
                         navController.navigate(BowlingAppScreen.AddLeague.name)
                     } else
-                        navController.navigate(BowlingAppScreen.AddTournament.name)
+                        navController.navigate(BowlingAppScreen.AddGame.name)
                 }
             )
         }
@@ -148,7 +148,7 @@ fun BowlingApp(modifier: Modifier = Modifier) {
 
             //goes to "Practice screen"
             composable(route = BowlingAppScreen.Practice.name) {
-                AddGame()
+                PracticeScreen()
             }
 
             //goes to "Statistics screen"
@@ -168,7 +168,7 @@ fun BowlingApp(modifier: Modifier = Modifier) {
 
             //goes to "Help screen"
             composable(route = BowlingAppScreen.Help.name) {
-                HelpScreen()
+                SquareWithSmallSquareScreen()
             }
 
             //goes to "AddLeague screen"
