@@ -34,10 +34,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.seniorproject.data.DataSource.leagues
+import com.example.seniorproject.data.DataSource.tournaments
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ProfessionalScreen() {
+fun ProfessionalScreen(leagues: List<String>, tournaments: List<String>) {
     var selectedOption by remember { mutableStateOf("Leagues") }
 
     Column {
@@ -76,20 +78,22 @@ fun ProfessionalScreen() {
             )
         }
 
-        // Display content based on the selected option
-        if (selectedOption == "Leagues") {
-            // Content for "Leagues" selected
-            ClickableText("Monday Night Trios") {}
-            ClickableText("Northrock Mixers") {}
-        } else if (selectedOption == "Tournaments") {
-            // Content for "Tournaments" selected
-            ClickableText("None") {}
+        // Display content based on the selected option and the list
+        val filteredContent = when (selectedOption) {
+            "Leagues" -> leagues
+            "Tournaments" -> tournaments
+            else -> emptyList()
+        }
+
+        filteredContent.forEach { item ->
+            ClickableText(item) {}
         }
     }
 }
 
+
 @Preview (showBackground = true)
 @Composable
 fun ProfessionalPreview(){
-    ProfessionalScreen()
+    ProfessionalScreen(leagues, tournaments)
 }
