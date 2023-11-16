@@ -21,9 +21,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.seniorproject.data.DataSource
-import com.example.seniorproject.data.DataSource.leagues
-import com.example.seniorproject.data.DataSource.tournaments
 import com.example.seniorproject.ui.theme.*
 
 enum class BowlingAppScreen(@StringRes val title: Int) {
@@ -145,7 +142,7 @@ fun BowlingApp(modifier: Modifier = Modifier) {
 
             //goes to "Professional screen"
             composable(route = BowlingAppScreen.Professional.name) {
-                ProfessionalScreen(leagues, tournaments)
+                ProfessionalScreen(contentList)
             }
 
             //goes to "Practice screen"
