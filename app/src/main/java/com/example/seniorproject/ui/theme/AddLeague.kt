@@ -33,50 +33,30 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.seniorproject.R
+import com.example.seniorproject.data.Content
+import com.example.seniorproject.data.League
+import com.example.seniorproject.data.contentList
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-data class League(
-    val name: String,
-    val startDate: String,
-    val numOfWeeks: Int,
-    val gamesPerWeek: Int,
-    val gamesPerSeries: Int
-)
-
-data class Tournament(
-    val name: String,
-    val startDate: String,
-    val gamesPerSeries: Int
-)
-
-sealed class Content {
-    data class LeagueContent(val league: League) : Content()
-    data class TournamentContent(val tournament: Tournament) : Content()
-}
-
-val league1 = League("Monday Night Trios", "11/15/2023", 17, 3, 3)
-val league2 = League("Northrock Mixers", "11/14/2023", 15, 3, 3)
-
-val tournament1 = Tournament("t1", "11/15/2023", 3)
-val tournament2 = Tournament("t2", "11/14/2023", 3)
-
-val contentList: List<Content> = listOf(
-    Content.LeagueContent(league1),
-    Content.LeagueContent(league2),
-    Content.TournamentContent(tournament1),
-    Content.TournamentContent(tournament2)
-)
-
 @Composable
 fun AddLeague(modifier: Modifier = Modifier) {
     var leagueName by remember { mutableStateOf("") }
+    var startDate by remember { mutableStateOf(LocalDate.now()) }
+    var numberOfWeeks by remember { mutableStateOf("") }
+    var gamesPerWeek by remember { mutableStateOf("") }
+    var gamesPerSeries by remember { mutableStateOf("") }
     var handicapActive by remember { mutableStateOf(false) }
+    var basisScore by remember { mutableStateOf("") }
+    var percentFactor by remember { mutableStateOf("") }
 
-    Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(5.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(5.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         OutlinedTextField(
             value = leagueName,
             onValueChange = { leagueName = it},
@@ -89,7 +69,30 @@ fun AddLeague(modifier: Modifier = Modifier) {
         GamesPerSeriesRow()
         HouseRow()
         HandicapRow(handicapActive = handicapActive, onHandicapActive = { handicapActive = it })
-        Button(onClick = {  },
+        Button(
+            onClick = {
+                // Create a new League object with the entered values
+                val newLeague = League(
+                    name = leagueName,
+                    startDate = startDate.toString(), // Convert LocalDate to String as per your requirement
+                    numOfWeeks = numberOfWeeks.toIntOrNull() ?: 0,
+                    gamesPerWeek = gamesPerWeek.toIntOrNull() ?: 0,
+                    gamesPerSeries = gamesPerSeries.toIntOrNull() ?: 0
+                )
+
+                // Add the new League object to the contentList
+                contentList += Content.LeagueContent(newLeague)
+
+                // Reset fields for a new entry
+                leagueName = ""
+                startDate = LocalDate.now()
+                numberOfWeeks = ""
+                gamesPerWeek = ""
+                gamesPerSeries = ""
+                handicapActive = false
+                basisScore = ""
+                percentFactor = ""
+            },
             modifier.widthIn(min = 250.dp)) {
             Text(stringResource(R.string.add))
         }

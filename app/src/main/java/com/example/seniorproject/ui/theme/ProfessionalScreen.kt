@@ -34,10 +34,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.seniorproject.data.Content
+import com.example.seniorproject.data.League
+import com.example.seniorproject.data.Tournament
+import com.example.seniorproject.data.contentList
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ProfessionalScreen(contentList: List<Content>) {
+fun ProfessionalScreen(contentList: List<Content>, onOptionSelected: (String) -> Unit) {
     var selectedOption by remember { mutableStateOf("Leagues") }
 
     Column {
@@ -51,7 +55,10 @@ fun ProfessionalScreen(contentList: List<Content>) {
                 horizontalArrangement = Arrangement.SpaceAround,
                 content = {
                     IconButton(
-                        onClick = { selectedOption = "Leagues" },
+                        onClick = {
+                            selectedOption = "Leagues"
+                            onOptionSelected(selectedOption)
+                        },
                         modifier = Modifier.padding(8.dp)
                     ) {
                         Text(
@@ -62,7 +69,10 @@ fun ProfessionalScreen(contentList: List<Content>) {
                         )
                     }
                     IconButton(
-                        onClick = { selectedOption = "Tournaments" },
+                        onClick = {
+                            selectedOption = "Tournaments"
+                            onOptionSelected(selectedOption)
+                        },
                         modifier = Modifier.padding(8.dp)
                     ) {
                         Text(
@@ -103,8 +113,11 @@ fun ProfessionalScreen(contentList: List<Content>) {
     }
 }
 
-@Preview (showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun ProfessionalPreview(){
-    ProfessionalScreen(contentList)
+fun ProfessionalScreenPreview() {
+    ProfessionalScreen(
+        contentList = contentList,
+        onOptionSelected = { /* Handle option selected */ }
+    )
 }

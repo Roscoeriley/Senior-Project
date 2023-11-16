@@ -13,6 +13,9 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -21,6 +24,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.seniorproject.data.contentList
 import com.example.seniorproject.ui.theme.*
 
 enum class BowlingAppScreen(@StringRes val title: Int) {
@@ -47,6 +51,7 @@ fun BowlingAppBar(
     navigateUp: () -> Unit,
     showAddIcon: Boolean,
     onAddClicked: () -> Unit,
+    selectedOption: String, // Add the selectedOption parameter
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
@@ -83,8 +88,11 @@ fun BowlingApp(modifier: Modifier = Modifier) {
     val currentScreen = BowlingAppScreen.valueOf(
         backStackEntry?.destination?.route ?: BowlingAppScreen.Login.name
     )
-/*    // Create ViewModel
-    val viewModel: OrderViewModel = viewModel()*/
+
+    var selectedOption by remember { mutableStateOf("Leagues") }
+
+    /*    // Create ViewModel
+        val viewModel: OrderViewModel = viewModel()*/
 
     Scaffold(
         topBar = {
@@ -94,11 +102,14 @@ fun BowlingApp(modifier: Modifier = Modifier) {
                 navigateUp = { navController.navigateUp() },
                 showAddIcon = currentScreen == BowlingAppScreen.Professional || currentScreen == BowlingAppScreen.Practice,
                 onAddClicked = {
-                    if (currentScreen == BowlingAppScreen.Professional) {
+                    if (currentScreen == BowlingAppScreen.Professional && selectedOption == "Leagues") {
                         navController.navigate(BowlingAppScreen.AddLeague.name)
+                    } else if (currentScreen == BowlingAppScreen.Professional && selectedOption == "Tournaments") {
+                        navController.navigate(BowlingAppScreen.AddTournament.name)
                     } else
                         navController.navigate(BowlingAppScreen.AddGame.name)
-                }
+                },
+                selectedOption = selectedOption
             )
         }
     ) { innerPadding ->
@@ -142,7 +153,10 @@ fun BowlingApp(modifier: Modifier = Modifier) {
 
             //goes to "Professional screen"
             composable(route = BowlingAppScreen.Professional.name) {
-                ProfessionalScreen(contentList)
+                ProfessionalScreen(
+                    contentList = contentList,
+                    onOptionSelected = { option -> selectedOption = option }
+                )
             }
 
             //goes to "Practice screen"

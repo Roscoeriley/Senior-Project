@@ -20,11 +20,19 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.seniorproject.R
+import com.example.seniorproject.data.Content
+import com.example.seniorproject.data.League
+import com.example.seniorproject.data.Tournament
+import com.example.seniorproject.data.contentList
+import java.time.LocalDate
 
 @Composable
 fun AddTournament(modifier: Modifier = Modifier) {
     var tournamentName by remember { mutableStateOf("") }
+    var gamesPerSeries by remember { mutableStateOf("") }
     var handicapActive by remember { mutableStateOf(false) }
+    var basisScore by remember { mutableStateOf("") }
+    var percentFactor by remember { mutableStateOf("") }
 
     Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         OutlinedTextField(
@@ -35,7 +43,24 @@ fun AddTournament(modifier: Modifier = Modifier) {
         )
         GamesPerSeriesRow()
         HandicapRow(handicapActive = handicapActive, onHandicapActive = { handicapActive = it })
-        Button(onClick = {  },
+        Button(
+            onClick = {
+                // Create a new Tournament object with the entered values
+                val newTournament = Tournament(
+                    name = tournamentName,
+                    gamesPerSeries = gamesPerSeries.toIntOrNull() ?: 0
+                )
+
+                // Add the new League object to the contentList
+                contentList += Content.TournamentContent(newTournament)
+
+                // Reset fields for a new entry
+                tournamentName = ""
+                gamesPerSeries = ""
+                handicapActive = false
+                basisScore = ""
+                percentFactor = ""
+            },
             modifier.widthIn(min = 250.dp)) {
             Text(stringResource(R.string.add))
         }
