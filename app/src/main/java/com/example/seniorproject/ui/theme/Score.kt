@@ -253,6 +253,18 @@ fun TriangleOfButtons() {
     val buttonSize = 56.dp
     val spacing = 10.dp
 
+    // Create a state to track the button clicks
+    var button1Clicked by remember { mutableStateOf(false) }
+    var button2Clicked by remember { mutableStateOf(false) }
+    var button3Clicked by remember { mutableStateOf(false) }
+    var button4Clicked by remember { mutableStateOf(false) }
+    var button5Clicked by remember { mutableStateOf(false) }
+    var button6Clicked by remember { mutableStateOf(false) }
+    var button7Clicked by remember { mutableStateOf(false) }
+    var button8Clicked by remember { mutableStateOf(false) }
+    var button9Clicked by remember { mutableStateOf(false) }
+    var button10Clicked by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -264,40 +276,40 @@ fun TriangleOfButtons() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { button7Clicked = !button7Clicked },
                 modifier = Modifier.size(buttonSize),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White
+                    backgroundColor = if (button7Clicked) Color.Gray else Color.White
                 ),
                 shape = CircleShape
             ) {
                 Text(text = "7", color = Color.Black)
             }
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { button8Clicked = !button8Clicked },
                 modifier = Modifier.size(buttonSize),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White
+                    backgroundColor = if (button8Clicked) Color.Gray else Color.White
                 ),
                 shape = CircleShape
             ) {
                 Text(text = "8", color = Color.Black)
             }
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { button9Clicked = !button9Clicked },
                 modifier = Modifier.size(buttonSize),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White
+                    backgroundColor = if (button9Clicked) Color.Gray else Color.White
                 ),
                 shape = CircleShape
             ) {
                 Text(text = "9", color = Color.Black)
             }
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { button10Clicked = !button10Clicked },
                 modifier = Modifier.size(buttonSize),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White
+                    backgroundColor = if (button10Clicked) Color.Gray else Color.White
                 ),
                 shape = CircleShape
             ) {
@@ -310,30 +322,30 @@ fun TriangleOfButtons() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { button4Clicked = !button4Clicked },
                 modifier = Modifier.size(buttonSize),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White
+                    backgroundColor = if (button4Clicked) Color.Gray else Color.White
                 ),
                 shape = CircleShape
             ) {
                 Text(text = "4", color = Color.Black)
             }
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { button5Clicked = !button5Clicked },
                 modifier = Modifier.size(buttonSize),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White
+                    backgroundColor = if (button5Clicked) Color.Gray else Color.White
                 ),
                 shape = CircleShape
             ) {
                 Text(text = "5", color = Color.Black)
             }
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { button6Clicked = !button6Clicked },
                 modifier = Modifier.size(buttonSize),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White
+                    backgroundColor = if (button6Clicked) Color.Gray else Color.White
                 ),
                 shape = CircleShape
             ) {
@@ -346,20 +358,20 @@ fun TriangleOfButtons() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { button2Clicked = !button2Clicked },
                 modifier = Modifier.size(buttonSize),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White
+                    backgroundColor = if (button2Clicked) Color.Gray else Color.White
                 ),
                 shape = CircleShape
             ) {
                 Text(text = "2", color = Color.Black)
             }
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { button3Clicked = !button3Clicked },
                 modifier = Modifier.size(buttonSize),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White
+                    backgroundColor = if (button3Clicked) Color.Gray else Color.White
                 ),
                 shape = CircleShape
             ) {
@@ -372,10 +384,10 @@ fun TriangleOfButtons() {
             horizontalArrangement = Arrangement.Center
         ) {
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { button1Clicked = !button1Clicked },
                 modifier = Modifier.size(buttonSize),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White
+                    backgroundColor = if (button1Clicked) Color.Gray else Color.White
                 ),
                 shape = CircleShape
             ) {

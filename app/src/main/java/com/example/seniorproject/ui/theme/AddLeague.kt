@@ -33,9 +33,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.seniorproject.R
-import com.example.seniorproject.data.Content
+import com.example.seniorproject.data.ContentForProfessional
 import com.example.seniorproject.data.League
-import com.example.seniorproject.data.contentList
+import com.example.seniorproject.data.professionalContentList
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
@@ -80,8 +80,8 @@ fun AddLeague(modifier: Modifier = Modifier) {
                     gamesPerSeries = gamesPerSeries.toIntOrNull() ?: 0
                 )
 
-                // Add the new League object to the contentList
-                contentList += Content.LeagueContent(newLeague)
+                // Add the new League object to the professionalContentList
+                professionalContentList += ContentForProfessional.LeagueContent(newLeague)
 
                 // Reset fields for a new entry
                 leagueName = ""

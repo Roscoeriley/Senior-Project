@@ -20,10 +20,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.seniorproject.R
-import com.example.seniorproject.data.Content
+import com.example.seniorproject.data.ContentForProfessional
 import com.example.seniorproject.data.League
 import com.example.seniorproject.data.Tournament
-import com.example.seniorproject.data.contentList
+import com.example.seniorproject.data.professionalContentList
 import java.time.LocalDate
 
 @Composable
@@ -52,7 +52,7 @@ fun AddTournament(modifier: Modifier = Modifier) {
                 )
 
                 // Add the new League object to the contentList
-                contentList += Content.TournamentContent(newTournament)
+                professionalContentList += ContentForProfessional.TournamentContent(newTournament)
 
                 // Reset fields for a new entry
                 tournamentName = ""

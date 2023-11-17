@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,35 +21,43 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.seniorproject.data.ContentForPractice
+import com.example.seniorproject.data.Game
+import com.example.seniorproject.data.games
+import com.example.seniorproject.data.practiceContentList
 
 @Composable
-fun PracticeScreen() {
-Column(
-        verticalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth()
+fun PracticeScreen(contentList: List<ContentForPractice>) {
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier.fillMaxWidth().padding(16.dp)
     ) {
-        ClickableText("9/22/2023"){}
-        Spacer(modifier = Modifier.width(16.dp))
-        ClickableText("9/29/2023") {}
-        Spacer(modifier = Modifier.width(16.dp))
-        ClickableText("9/29/2023") {}
-        Spacer(modifier = Modifier.width(16.dp))
-        ClickableText("9/29/2023") {}
+        items(contentList) { content ->
+            when (content) {
+                is ContentForPractice.GameContent -> {
+                    ClickableGameItem(game = content.game) {
+                        // Handle click event if needed
+                    }
+                }
+            }
+        }
     }
 }
 
 @Composable
-fun ClickableText(text: String, onClick: () -> Unit) {
-    Text(
-        text = text,
-        modifier = Modifier.clickable { onClick() }
-            .padding(8.dp), // Add padding for better spacing
-        fontSize = 20.sp // Set the font size to 20sp (adjust as needed)
-    )
+fun ClickableGameItem(game: Game, onClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .clickable { onClick() }
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
+        Text(text = game.date, fontSize = 20.sp)
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PracticePreview(){
-    PracticeScreen()
+fun PracticePreview() {
+    PracticeScreen(contentList = practiceContentList)
 }

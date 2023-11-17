@@ -16,6 +16,7 @@
     <string name="add_tournament">Add Tournament</string>
     <string name="add_game">Add Game</string>
     <string name="back_button">Back</string>
+    <string name="league_info">League Info</string>
     //add league/tournament screen
     <string name="league_name">League Name</string>
     <string name="start_date">Start Date</string>
